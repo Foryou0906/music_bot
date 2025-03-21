@@ -4,9 +4,9 @@ from discord.ext import commands, tasks
 import feedparser
 import yt_dlp as youtube_dl
 import os
-#from dico_token import Token  # dico_token.py에서 Token 임포트
 
 Token = os.environ.get('DISCORD_TOKEN')
+
 # Suppress noise about console usage from errors
 youtube_dl.utils.bug_reports_message = lambda: ''
 
@@ -242,6 +242,13 @@ bot = commands.Bot(
     intents=intents,
 )
 
+# 봇이 커맨드를 처리할 수 있도록 on_message 이벤트 추가
+@bot.event
+async def on_message(message):
+    if message.author == bot.user:
+        return
+    await bot.process_commands(message)  # 커맨드를 처리할 수 있도록
+
 @bot.event
 async def on_ready():
     print(f'{bot.user} 봇 실행!! (ID: {bot.user.id})')
@@ -253,4 +260,5 @@ async def main():
         await bot.start(Token)
 
 asyncio.run(main())
+
 
