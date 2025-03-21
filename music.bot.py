@@ -48,14 +48,19 @@ class YTDLSource(discord.PCMVolumeTransformer):
 
         filename = data['url'] if stream else ytdl.prepare_filename(data)
         return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)
-
-class Music(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
+        
+class Music(commands.Cog): 
+    def __init__(self, bot):  
+        self.bot = bot 
         self.queue = asyncio.Queue()
         self.current = None
         self.is_playing = False
 
+    @commands.command(name="ping")
+    async def ping(self, ctx: commands.Context):
+        print("someone send ping")
+        await ctx.reply(f"pong! {round(self.bot.latency * 1000)}ms")
+        
     @commands.command(aliases=['입장'])
     async def join(self, ctx):
         """음성 채널 입장 (= !입장)"""
