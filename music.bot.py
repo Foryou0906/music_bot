@@ -60,6 +60,7 @@ class Music(commands.Cog):
     async def join(self, ctx):
         """음성 채널 입장 (= !입장)"""
         if ctx.author.voice and ctx.author.voice.channel:
+            print("봇이 들어왔습니다.")
             channel = ctx.author.voice.channel
             # 이미 음성 채널에 입장한 경우 해당 채널로 이동
             if ctx.voice_client is not None:
