@@ -3,8 +3,10 @@ import discord
 from discord.ext import commands, tasks
 import feedparser
 import yt_dlp as youtube_dl
-from dico_token import Token  # dico_token.py에서 Token 임포트
+import os
+#from dico_token import Token  # dico_token.py에서 Token 임포트
 
+Token = os.getemv('DISCORD_TOKEN')
 # Suppress noise about console usage from errors
 youtube_dl.utils.bug_reports_message = lambda: ''
 
